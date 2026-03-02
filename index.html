@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulyator Tailwind</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="flex items-center justify-center h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded-xl shadow-lg w-80">
+        <h1 class="text-2xl font-bold mb-4 text-center">Kalkulyator</h1>
+        <input type="text" id="display" placeholder="0" class="w-full p-3 mb-4 text-right text-xl border rounded-md" />
+
+        <div class="flex space-x-2 mb-4">
+            <input type="text" placeholder="Son 1" id="num1" class="flex-1 p-2 border rounded-md text-center" />
+            <select id="operator" class="flex-1 p-2 border rounded-md text-center">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+            <input type="text" placeholder="Son 2" id="num2" class="flex-1 p-2 border rounded-md text-center" />
+        </div>
+
+        <div class="flex space-x-2">
+            <button onclick="calculate()"
+                class="flex-1 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Hisobla</button>
+            <button onclick="clearDisplay()"
+                class="flex-1 bg-red-500 text-white p-2 rounded-md hover:bg-red-600">C</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+        const num1Input = document.getElementById('num1');
+        const num2Input = document.getElementById('num2');
+        const operatorSelect = document.getElementById('operator');
+
+        function calculate() {
+            const a = parseFloat(num1Input.value);
+            const b = parseFloat(num2Input.value);
+            const op = operatorSelect.value;
+
+            if (isNaN(a) || isNaN(b)) {
+                display.value = "Error";
+                return;
+            }
+
+            let result;
+            switch (op) {
+                case '+': result = a + b; break;
+                case '-': result = a - b; break;
+                case '*': result = a * b; break;
+                case '/': result = b !== 0 ? a / b : "Error"; break;
+                default: result = "Error";
+            }
+            display.value = result;
+        }
+
+        function clearDisplay() {
+            display.value = "";
+            num1Input.value = "";
+            num2Input.value = "";
+            operatorSelect.value = "+";
+        }
+    </script>
+</body>
+
+</html>
